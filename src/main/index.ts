@@ -17,9 +17,9 @@ function createWindow(): void {
   const windowWidth = 180
   const windowHeight = 200
 
-  // Calculate position: bottom-right corner with margin
+  // Calculate position: bottom-right corner, sitting on taskbar
   const x = width - windowWidth - 20
-  const y = height - windowHeight
+  const y = height - windowHeight + 100
 
   // Create the browser window with floating widget configuration.
   mainWindow = new BrowserWindow({
@@ -45,6 +45,8 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow?.show()
+    // Make window click-through by default
+    mainWindow?.setIgnoreMouseEvents(true, { forward: true })
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {

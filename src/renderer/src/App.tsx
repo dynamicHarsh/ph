@@ -3,6 +3,12 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from './firebaseSetup'
 import Lottie from 'lottie-react'
 import catIdle from './assets/cat-idle.json.json'
+import catSleep from './assets/cat-sleep.json.json'
+import catSearching from './assets/cat-searching.json.json'
+import catFun from './assets/cat-fun.json.json'
+import catCute from './assets/cat-cute.json.json'
+import catCoding from './assets/cat-coding.json.json'
+import catError from './assets/cat-error.json.json'
 import './App.css'
 
 interface WidgetState {
@@ -20,11 +26,19 @@ function getAnimationData(status: string) {
   // Can add more animations like cat-sleep.json later
   switch (status) {
     case 'coding':
-      return catIdle
+      return catCoding
     case 'sleeping':
-      return catIdle
+      return catSleep
+    case 'searching':
+      return catSearching
     case 'love':
       return catIdle
+    case 'fun':
+      return catFun
+    case 'cute':
+      return catCute
+    case 'error':
+      return catError
     default:
       return catIdle
   }
@@ -142,11 +156,13 @@ function App(): React.JSX.Element {
 
   // Mouse event handlers for interactive elements
   const handleMouseEnterInteractive = () => {
-    console.log('Mouse entered interactive area')
+    console.log('Mouse entered interactive area - enabling mouse events')
+    window.api.setIgnoreMouseEvents(false)
   }
 
   const handleMouseLeaveInteractive = () => {
-    console.log('Mouse left interactive area')
+    console.log('Mouse left interactive area - disabling mouse events')
+    window.api.setIgnoreMouseEvents(true)
   }
 
   // Click handler for the cat - fetch message from Firebase
@@ -172,7 +188,8 @@ function App(): React.JSX.Element {
           animationData={getAnimationData(widgetState.status)}
           loop={true}
           autoplay={true}
-          style={{ width: 120, height: 120 }}
+          style={{ width: '100%', height: '100%' }}
+          rendererSettings={{ preserveAspectRatio: 'xMidYMid meet', hideOnTransparent: true, scale: 0.3 }}
         />
       </div>
     </div>

@@ -4,10 +4,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  width: 100vw;
-  height: 100vh;
-  padding-bottom: 0;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0px;
+  overflow: visible;
   background-color: transparent !important;
   pointer-events: none;
 }
@@ -19,7 +19,7 @@
 /* Base state: hidden */
 .speech-bubble {
   position: absolute;
-  bottom: 45px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(20, 20, 20, 0.6);
@@ -44,7 +44,7 @@
   line-height: 1.5;
   font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 /* Fade-in state */
@@ -71,12 +71,33 @@
   cursor: pointer;
   margin-bottom: -40px;
   pointer-events: auto;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.avatar:active {
+  cursor: grabbing;
 }
 
 /* Lottie animation container */
 .avatar svg {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
   display: block;
   pointer-events: none;
+  background: transparent !important;
+}
+
+/* Force transparency on Lottie layers */
+.avatar svg [fill="#FFFFFF"],
+.avatar svg [fill="#ffffff"],
+.avatar svg [fill="white"] {
+  fill: transparent !important;
+}
+
+.avatar svg [stroke="#FFFFFF"],
+.avatar svg [stroke="#ffffff"],
+.avatar svg [stroke="white"] {
+  stroke: transparent !important;
 }
