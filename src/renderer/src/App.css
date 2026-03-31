@@ -1,0 +1,82 @@
+/* Main container - transparent background, click-through by default */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 100vh;
+  padding-bottom: 0;
+  overflow: hidden;
+  background-color: transparent !important;
+  pointer-events: none;
+}
+
+/* ============================================
+   SPEECH BUBBLE - TEXT ONLY WITH FADE IN/OUT
+   ============================================ */
+
+/* Base state: hidden */
+.speech-bubble {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 180px;
+  width: fit-content;
+  min-width: 120px;
+  text-align: center;
+  border: none;
+  cursor: default;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+/* Fade-in state */
+.speech-bubble.fade-in {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fade-out state */
+.speech-bubble.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.speech-bubble::after {
+  content: none;
+}
+
+/* Avatar container - interactive */
+.avatar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: -40px;
+  pointer-events: auto;
+}
+
+/* Lottie animation container */
+.avatar svg {
+  width: 120px;
+  height: 120px;
+  display: block;
+  pointer-events: none;
+}
