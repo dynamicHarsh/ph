@@ -189,7 +189,7 @@ function App(): React.JSX.Element {
           loop={true}
           autoplay={true}
           style={{ width: '100%', height: '100%' }}
-          rendererSettings={{ preserveAspectRatio: 'xMidYMid meet', hideOnTransparent: true, scale: 0.3 }}
+          rendererSettings={{ preserveAspectRatio: 'xMidYMid meet', hideOnTransparent: true }}
         />
       </div>
     </div>

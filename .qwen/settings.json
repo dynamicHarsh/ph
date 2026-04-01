@@ -6,7 +6,17 @@
       "Bash(git init)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(git push *)",
+      "Bash(python *)",
+      "Bash(rmdir *)",
+      "Bash(set *)",
+      "Bash(dir *)",
+      "Bash(\"c:\\program files\\7-zip\\7z.exe\" *)",
+      "Bash(curl *)",
+      "Bash(findstr *)",
+      "Bash(copy *)",
+      "Bash(powershell *)"
     ]
   },
   "$version": 3

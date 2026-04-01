@@ -1,12 +1,14 @@
-import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen, Tray, Menu, nativeImage } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import trayIcon from '../../resources/tray-icon.png?asset'
 
 // Disable GPU cache to prevent disk cache errors on Windows
 app.commandLine.appendSwitch('disable-gpu-cache')
 
 let mainWindow: BrowserWindow | null = null
+let tray: Tray | null = null
 
 function createWindow(): void {
   // Get primary display work area for positioning
@@ -63,6 +65,44 @@ function createWindow(): void {
   }
 }
 
+function createTray(): void {
+  // Create tray icon from the tray-icon.png file
+  const trayImage = nativeImage.createFromPath(trayIcon)
+  const resizedIcon = trayImage.resize({ width: 16, height: 16 })
+
+  tray = new Tray(resizedIcon)
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show',
+      click: () => {
+        mainWindow?.show()
+      }
+    },
+    {
+      label: 'Hide',
+      click: () => {
+        mainWindow?.hide()
+      }
+    },
+    { type: 'separator' },
+    {
+      label: 'Quit',
+      click: () => {
+        app.quit()
+      }
+    }
+  ])
+
+  tray.setToolTip('ph App')
+  tray.setContextMenu(contextMenu)
+
+  // Double-click on tray icon to show window
+  tray.on('double-click', () => {
+    mainWindow?.show()
+  })
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -76,6 +116,9 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+
+  // Create system tray
+  createTray()
 
   // IPC handler for setting mouse events ignore
   ipcMain.on('set-ignore-mouse-events', (_event, ignore: boolean) => {
@@ -105,8 +148,10 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+  // Keep app running when window is closed - tray menu still available
+  // User can quit via tray menu or Cmd + Q on macOS
   if (process.platform !== 'darwin') {
-    app.quit()
+    // Don't quit - keep app running for tray menu
   }
 })
 

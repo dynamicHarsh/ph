@@ -1,5 +1,5 @@
 {
-  "name": "fun",
+  "name": "ph",
   "version": "1.0.0",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
@@ -17,13 +17,13 @@
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
+    "build:win-portable": "npm run build && electron-builder --win portable",
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.2",
     "@electron-toolkit/utils": "^4.0.0",
-    "@lottiefiles/dotlottie-react": "^0.18.8",
     "electron-updater": "^6.3.9",
     "firebase": "^12.11.0",
     "lottie-react": "^2.4.1"

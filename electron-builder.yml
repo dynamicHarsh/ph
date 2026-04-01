@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: fun
+productName: ph
 directories:
   buildResources: build
 files:
@@ -9,10 +9,21 @@ files:
   - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+asar: true
 asarUnpack:
   - resources/**
 win:
-  executableName: fun
+  executableName: ph
+  compression: maximum
+  target:
+    - portable
+  requestedExecutionLevel: asInvoker
+  signingHashAlgorithms:
+    - sha256
+portable:
+  artifactName: ${productName}-portable.${ext}
+  unpackDirName: ph-portable
+  requestExecutionLevel: user
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
