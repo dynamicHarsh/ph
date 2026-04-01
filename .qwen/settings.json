@@ -16,7 +16,8 @@
       "Bash(curl *)",
       "Bash(findstr *)",
       "Bash(copy *)",
-      "Bash(powershell *)"
+      "Bash(powershell *)",
+      "Bash(del *)"
     ]
   },
   "$version": 3

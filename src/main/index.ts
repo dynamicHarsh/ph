@@ -13,14 +13,14 @@ let tray: Tray | null = null
 function createWindow(): void {
   // Get primary display work area for positioning
   const primaryDisplay = screen.getPrimaryDisplay()
-  const { width, height } = primaryDisplay.workAreaSize
+  const { height } = primaryDisplay.workAreaSize
 
   // Window dimensions
   const windowWidth = 180
   const windowHeight = 200
 
-  // Calculate position: bottom-right corner, sitting on taskbar
-  const x = width - windowWidth - 20
+  // Calculate position: bottom-left corner, sitting on taskbar
+  const x = 20
   const y = height - windowHeight + 100
 
   // Create the browser window with floating widget configuration.
@@ -44,6 +44,9 @@ function createWindow(): void {
       contextIsolation: true
     }
   })
+
+  // Set window to always be on top of everything, including taskbar
+  mainWindow.setAlwaysOnTop(true, 'screen-saver')
 
   mainWindow.on('ready-to-show', () => {
     mainWindow?.show()

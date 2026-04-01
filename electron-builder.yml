@@ -16,10 +16,8 @@ win:
   executableName: ph
   compression: maximum
   target:
-    - portable
+    - dir
   requestedExecutionLevel: asInvoker
-  signingHashAlgorithms:
-    - sha256
 portable:
   artifactName: ${productName}-portable.${ext}
   unpackDirName: ph-portable
